@@ -10,12 +10,11 @@ class Fave extends Component {
   }
 
   handleClick() {
-    console.log('Favourited ' + this.props.film.title)
+    console.log('Favourited' + this.props.film.title)
     this.setState((prevState) => {return {isFave: !prevState.isFave}})
   }
   render() {
-    const add_to_queue = this.state.isFave? "add_to_queue" : "remove_from_queue"
-    console.log(this.state.isFave);
+    const add_to_queue = this.state.isFave? " add_to_queue" : " remove_from_queue"
     return (
       <div className={"film-row-fave " + add_to_queue} onClick={(e) => { e.stopPropagation(); this.handleClick()}}>
         <i className="material-icons">add_to_queue</i>
