@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import FilmRow from './FilmRow.js';
 
-function FilmListing(props) {
-  var filmList = props.tmdb.films.map(function(film) {
-    return <FilmRow film={film} key={film.id} />
-  });
-  return (
-    <div className="film-list">
-      <h1 className="section-title">FILMS</h1>
-      <ul>
-        {filmList}
-      </ul>
-    </div>
-  )
+class FilmListing extends Component {
+  handleFilterClick(filter) {
+    console.log('Setting filter to ' + filter)
+  }
+  render() {
+    
+    var filmRows = this.props.tmdb.films.map(film => {
+      return <FilmRow film={film} key={film.id} click={this.handleFilterClick}/>
+    });
+      
+    return (
+      <div className="film-list">
+        <h1 className="section-title">
+          FILMS
+        </h1>
+
+        <div className="film-list-filters">
+          <div className="film-list-filter" onClick={() => this.handleFilterClick('all')}>
+            ALL
+            <span className="section-count">{this.props.tmdb.films.length}</span>
+          </div>
+          <div className="film-list-filter" onClick={() => this.handleFilterClick('faves')}>
+            FAVES
+            <span className="section-count">0</span>
+          </div>
+        </div>
+        {filmRows}
+      </div>
+    )
+  }
 }
 
 export default FilmListing;
